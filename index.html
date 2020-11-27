@@ -7,6 +7,8 @@
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 
+	<script type="text/javascript" src="index.js"></script>
+
 	<style type="text/css">
 		div.rawContent {
 			clear:both; 
@@ -15,17 +17,62 @@
 		}
 		h1{
 			margin-top: 15px;
-			margin-bottom: 15px;
+			margin-bottom: 10px;
 		}
 		button{
-			margin-right: 44%;
+			margin-right: 46%;
 		}
-		/*.form-check-label{
-			margin-left: 0%;
+		.formLabel{
+			text-align:left;
+			margin-left: 31%;
 		}
-		.form-check-input{
-			margin-left: 80%;
-		}*/
+		.formRadio{
+			text-align:center;
+			margin-bottom: 10px;
+		}
+		.custom-select.sizeField{
+			width: 10%;
+			text-align: center;
+		}
+		.custom-select.listCh{
+			width: 30%;
+			height: 170px;
+			padding-left: 20px;
+			padding-right: 20px;
+
+		}
+		.info{
+			font-size: small;
+			color: red;
+			margin-top: 3%;
+			margin-bottom: -5px;
+			margin-left: -17%;
+			display: none;
+		}
+		.row.left{
+			margin-left: 15%;
+			width: 35%;
+			min-height: 180px;
+			border: 2px solid #bbeef6;
+			border-radius: 8px 0 0 8px;
+		}
+		.row.right{
+			margin-left: 1%;
+			width: 30%;
+			min-height: 250px;
+			border: 2px solid #bbeef6;
+			border-radius: 0 8px 8px 0;
+		}
+		.btn.btn-info.delete{
+			height: 35%; 
+			margin-right: 30%;
+		}
+		.textareaStyle{
+			margin-right: 3%; 
+			margin-bottom: 2%;
+			border-color: silver; 
+			color: #595959;
+		}
 	</style>
 </head>
 
@@ -51,35 +98,36 @@
 			<div class="rawContent">
 				<div class="form-group row">
 					<label for="ssid" class="col-sm-5 col-form-label">SSID:</label>
-					<input type="text" name="ssid" class="form-control col-sm-3">
+					<input type="text" id="ssidRaw" class="form-control col-sm-3">
 				</div>
 			
 				<div class="form-group row">
 					<label for="chBonding" class="col-sm-5 col-form-label">ChannelBonding:</label>
-					<input type="text" name="chBonding" class="form-control col-sm-3">
+					<input type="text" id="chBondingRaw" class="form-control col-sm-3">
 				</div>
 
 				<div class="form-group row">
 					<label for="wpaKey" class="col-sm-5 col-form-label">WPAKey:</label>
-					<input type="text" name="wpaKey" class="form-control col-sm-3">
+					<input type="text" id="wpaKeyRaw" class="form-control col-sm-3">
 				</div>
 
 				<div class="form-group row">
 					<label for="extendedCh" class="col-sm-5 col-form-label">ExtendedChannel:</label>
-					<input type="text" name="extendedCh" class="form-control col-sm-3">
+					<input type="text" id="extendedChRaw" class="form-control col-sm-3">
 				</div>
 
 				<div class="form-group row">
 					<label for="useChLim" class="col-sm-5 col-form-label">UseChannelLimit:</label>
-					<input type="text" name="useChLim" class="form-control col-sm-3">
+					<input type="text" id="useChLimRaw" class="form-control col-sm-3">
 				</div>
 
 				<div class="form-group row">
 					<label for="chLim" class="col-sm-5 col-form-label">ChannelLimit:</label>
-					<input type="text" name="chLim" class="form-control col-sm-3">
+					<input type="text" id="chLimRaw" class="form-control col-sm-3">
 				</div>
 			</div>
 		</div>
+
 
 
 		<div class="tab-pane fade show active" id="web" role="tabpanel" aria-labelledby="web-tab">
@@ -87,63 +135,113 @@
 			<div class="rawContent">
 
 				<div class="form-group row">
-					<label for="ssid" class="col-sm-5 col-form-label">SSID:</label>
-					<input type="text" name="ssid" class="form-control col-sm-3">
-				</div>
-			
-
-				<div class="form-group row">
-					<label for="chBonding" class="col-sm-5 col-form-label">ChannelBonding:</label>
-					<input type="text" name="chBonding" class="form-control col-sm-3">
-				</div>
-
-
-				<div class="form-group row">
-					<label for="wpaKey" class="col-sm-5 col-form-label">WPAKey: </label>
-					<input type="text" name="wpaKey" class="form-control col-sm-3">
-				</div>
-
-
-				<div class="form-group row">
-					<label class="col-sm-6 col-form-label"><b>Расширенные каналы:</b></label>
-				</div>
-
-				<div class="form-group row">
-					<div class="form-check form-check-inline">
-						<input type="radio" name="extendedChannel" id="extendedCh1" value="true" class="form-check-input">
-						<label for="extendedCh1" class="form-check-label">Включить</label>
-					</div>
-					<div class="form-check form-check-inline">
-						<input type="radio" name="extendedChannel" id="extendedCh2" value="false" class="form-check-input">
-						<label for="extendedCh2" class="form-check-label">Выключить</label>
+					<label for="ssid" class="col-sm-5 col-form-label"><b>Имя Wi-Fi-сети:</b></label>
+					<input type="text" id="ssidWeb" class="form-control col-sm-2" onblur="validationSSID()">
+					<div class="info" id="inoSSID">
+						<label>Поле не должно быть пустым!</label>
 					</div>
 				</div>
-
-
-				<div class="form-group row">
-					<label class="col-sm-7 col-form-label"><b>Использование списка разрешённых каналов:</b></label>
 				
 
 				<div class="form-group row">
-					<div class="form-check form-check-inline">
-						<input type="radio" name="useChannelLimit" id="useChLim1" value="true" class="form-check-input">
-						<label for="useChLim1" class="form-check-label">Включить</label>
-					</div>
-					<div class="form-check form-check-inline">
-						<input type="radio" name="useChannelLimit" id="useChLim2" value="false" class="form-check-input">
-						<label for="useChLim2" class="form-check-label">Выключить</label>
-					</div>
-				</div>
+					<label class="col-sm-5 col-form-label"><b>Ширина канала:</b></label>
+					<select class="custom-select sizeField" id="chBondingWeb" onchange="showOrHideExtendedCh()">
+						<option value="5" selected>5 МГц</option>
+						<option value="10">10 МГц</option>
+						<option value="20">20 МГц</option>
+						<option value="40">40 МГц</option>
+						<option value="80">80 МГц</option>
+					</select>
 				</div>
 
 
 				<div class="form-group row">
-					<label for="chLim" class="col-sm-5 col-form-label">ChannelLimit: </label>
-					<input type="text" name="chLim" class="form-control col-sm-3">
+					<label for="wpaKey" class="col-sm-5 col-form-label"><b>Пароль Wi-Fi:</b></label>
+					<input type="text" id="wpaKeyWeb" class="form-control col-sm-2" onblur="validationWPAKey()">
+					<div class="info" id="infoWPAKey">
+						<label>Длина строки не менее 8 и не более 63 символов!</label>
+					</div>
+				</div>
+
+				<div id="extendedChWithLabel" style="display: none;">
+				<div class="formLabel">
+					<label><b>Расширенные каналы:</b></label>
+				</div>
+				<div class="formRadio">
+					<div class="form-check form-check-inline">
+						<input type="radio" name="extendedChannel" id="extendedCh1Web" value="true" class="form-check-input" onchange="viewChannelEditor()">
+						<label for="extendedCh1Web" class="form-check-label">Включить</label>
+					</div>
+
+					<div class="form-check form-check-inline">
+						<input type="radio" name="extendedChannel" id="extendedCh2Web" value="false" class="form-check-input" onchange="viewChannelEditor()">
+						<label for="extendedCh2Web" class="form-check-label">Выключить</label>
+					</div>
+				</div>
 				</div>
 
 
-				<button type="button" class="btn btn-info">Применить</button>
+				<div class="formLabel">
+					<label><b>Использование списка разрешённых каналов:</b></label>
+				</div>
+				<div class="formRadio">
+					<div class="form-check form-check-inline">
+						<input type="radio" name="useChannelLimit" id="useChLim1Web" value="true" class="form-check-input" onchange="showOrHideChLim()">
+						<label for="useChLim1Web" class="form-check-label">Включить</label>
+					</div>
+
+					<div class="form-check form-check-inline">
+						<input type="radio" name="useChannelLimit" id="useChLim2Web" value="false" class="form-check-input" onchange="showOrHideChLim()">
+						<label for="useChLim2Web" class="form-check-label">Выключить</label>
+					</div>
+				</div>
+
+
+				<div id="chLimWithLabel" style="display: none;">
+				<div class="formLabel">
+					<label><b>Список разрешённых каналов:</b></label>
+				</div>
+				<div class="form-group row">
+					<div class="row left">
+						<label style="padding-left: 10%; font-size: large;">Список доступных для подключения каналов:</label>
+
+						<div id="allChnl">
+							<label style="margin-right: 8%; font-size: small;">Введите каналы, которые необходимо подключить, разделяя</label>
+							<label style="margin-right: 25%; font-size: small;">пробелом, в диапазоне от 36 до 165.</label>
+							<div class="input-group mb-3">
+								<input type="text" class="form-control" placeholder="Каналы от 36 до 165" aria-describedby="addChnls" id="addChnl">
+								<div class="input-group-append">
+									<button type="button" class="btn btn-outline-info" id="addChnls" onclick="addAllChannels()">Добавить</button>
+								</div>
+							</div>
+						</div>
+
+						<div id="infoView" style="display: none;">
+							<label style="margin-right: 16%; font-size: small; color: red;">Для дальнейшей работы необходимо включить или</label> 
+							<label style="margin-right: 24%; font-size: small; color: red;">отключить опцию "Расширенные каналы".</label>							
+						</div>
+
+						<div id="listChnl">
+							<label style="margin-right: 8%; font-size: small;">Для выбора нескольких каналов используйте кнопки Ctrl или Shift совместно с мышкой.</label>
+							<select class="custom-select listCh" id="addChnlList" name="listChannel[]" multiple></select>
+							<button type="button" class="btn btn-info" onclick="addChannels()">Добавить</button>
+						</div>
+					</div>
+
+					<div class="row right">
+						<label style="padding-left: 15%; font-size: large;">Подключённые каналы:</label>
+
+						<div id="form-group">
+							<textarea id="addedChannels" rows="2" cols="48" class="textareaStyle" readonly></textarea>
+							<button type="button" class="btn btn-info delete" onclick="deleteChannel()">Удалить канал</button>
+						</div>
+					</div>
+					
+				</div>
+				</div>
+
+
+				<button type="button" class="btn btn-info" onclick="saveData()">Применить</button>
 			</div>
 		</div>
 	</div>
